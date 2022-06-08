@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block css%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/predict.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid bg col-lg-12">
+    <!--{{ content }}-->
+    <div class="row">
+        <div class="col-8 p-0">
+            <p>VACCINE m-RNA DEGRADATION</p>
+
+            <form class="form-container" method="POST" id="post-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="sequence">Sequence</label>
+                    <input type="text" id="sequence" name="sequence" autofocus placeholder="Type m-RNA sequence">
+                </div>
+                <div class="form-group">
+                    <label for="structure">Stucture</label> 
+                    <input type="text" id="structure" name="structure" placeholder="Type m-RNA structure"> 
+                </div>
+                <div class="form-group">
+                    <label for="predict_loop_type">Loop type</label>   
+                    <input type="text" id="predict_loop_type" name="predicted_loop_type" placeholder="Type m-RNA loop">       
+                </div>
+
+                <div class="form-group">
+                    <label for="length">Sequence length</label>
+                    <input type="text" id="length" name="length" placeholder="107" disabled>  
+                </div>
+                <div class="form-group">
+                    <label for="score">Length to score</label>
+                    <input type="text" id="score" name="score" placeholder="68" disabled>          
+                </div>
+
+                <div class="form-group btn-custom center">
+                    <input type="submit" value="Predict" class="btn-custom">
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-lg-4">
+            <img src="{% static 'img/e.png' %}" alt="" />
+        </div>
+    </div>
+</div>
+{% endblock %}

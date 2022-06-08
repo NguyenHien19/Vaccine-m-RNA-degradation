@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block css%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/results.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-2.4.3.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.4.3.min.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block main %}
+{% load index %}
+<nav class="navbar navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="results.html"><img src="{% static 'img/f.png' %}" alt=""></a>
+
+    <div class="navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'predict' %}">Back to predict</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+    <img src="{% static 'img/c.png' %}" alt="">
+</div>
+<table class="col-12">
+  <thead>
+    <tr>
+      <th>index</th>
+      <th>reactivity</th>
+      <th>deg_Mg_pH10</th>
+      <th>deg_Mg_50C</th>
+      <th>deg_pH10</th>
+      <th>deg_50C</th>
+      <th>bazo</th>
+    </tr>
+  </thead>
+        {% for i in data %}
+        <tbody>
+        <tr>
+        <td>{{i.6|add:1}}</td>
+        <td>{{i.0}}</td>
+        <td>{{i.1}}</td>
+        <td>{{i.2}}</td>
+        <td>{{i.3}}</td>
+        <td>{{i.4}}</td>
+        <td>{{i.5}}</td>
+        </tr> 
+      </tbody>
+        {% endfor %}
+      </table>
+      {{bazo_plot.0| safe}}
+      {{r_plot.0| safe}}
+      {{deg_Mg_pH10_plot.0| safe}}
+      {{deg_Mg_50C_plot.0| safe}}
+      {{deg_pH10_plot.0| safe}}
+      {{deg_50C_plot.0| safe}}
+{% endblock %}
+{% block js %}
+  <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script>
+  <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js"></script>
+  <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js"></script>
+  <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.4.3.min.js"></script>
+
+  <div class="container m-0 col-12">
+    <div class="row">
+      <div class="col-6 graph">
+        <h5>Baso distribution</h5>
+        {{bazo_plot.1| safe}}
+        <p><i>Count plot show the number of each type of baso in m-RNA sequence</i></p>
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col-6 graph-c graph-1">
+        <h5>Reactivity distribution</h5>
+        {{deg_Mg_50C_plot.1|safe}}
+        <p><i>
+          Line plot show the distribution of reactivity through sequence</br>
+          Reacivity : identify possible secondary structures of RNA
+        </i> 
+        </p>
+      </div> 
+    </div>
+       
+    <div class="row">
+      <div class="col-6 graph-c graph-2">
+        <h5>Deg_Mg_pH10 distribution</h5>
+        {{r_plot.1| safe}}
+        <p><i>
+          Line plot show the distribution of degradation rates when vaccine </br> 
+          was incubated with Magnesium under pH = 10
+        </i> 
+        </p>
+      </div> 
+
+      <div class="col-5 graph-c graph-3">
+        <h5>Deg_Mg_50C distribution</h5>
+        {{deg_Mg_pH10_plot.1|safe}}
+        <p><i>
+          Line plot show the distribution of degradation rates when vaccine </br> 
+          was incubated with Magnesium under temperature = 50 (C)
+        </i> 
+        </p>
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col-6 graph-c graph-2">
+        <h5>Deg_pH10 distribution</h5>
+        {{deg_pH10_plot.1|safe}}
+        <p><i>
+          Line plot show the distribution of degradation rates when vaccine </br> 
+          was incubated under pH = 10
+        </i> 
+        </p>
+      </div> 
+
+      <div class="col-5 graph-c graph-3">
+        <h5>Deg_50C distribution</h5>
+        {{deg_50C_plot.1| safe}}
+        <p><i>
+          Line plot show the distribution of degradation rates when vaccine </br> 
+          was incubated under temperature = 50 (C)
+        </i> 
+        </p>
+      </div> 
+    </div>
+  
+  </div>
+{% endblock %}
