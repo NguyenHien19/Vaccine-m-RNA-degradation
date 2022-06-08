@@ -8,7 +8,7 @@ Cài đặt:
 	py manage.py migrate
 	py manage.py runserver
 - Mở trình duyệt web, truy cập đường dẫn: http://127.0.0.1:8000/predict  
-Cách sử dụng :
+
 - Link video demo sản phẩm: https://youtu.be/0nMfAfMXvTQ 
 - Trang chủ của trang web sẽ có 3 trường để nhập nội dung là Sequence, Structure và Loop type và 2 trường mặc định là Sequence length và Length to score. Người dùng nhập nội dung tương ứng, sau đó chọn “Predict” để dự đoán.
 - Sau đó, web sẽ hiển thị kết quả dự đoán, bao gồm 107 bản ghi tương ứng với 107 bazơ nitơ trong chuỗi. Mỗi bản ghi bao gồm 5 giá trị dự đoán. Ngoài ra, còn có biểu đồ biểu diễn phân phối số lượng bazơ nitơ trong chuỗi và phân phối các giá trị dự đoán dọc theo chuỗi
